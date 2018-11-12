@@ -1,6 +1,6 @@
 const { __ } = wp.i18n; // Import __() from wp.i18n
-const { Component } = wp.element;
-const { TextControl, Button, Fragment, Spinner } = wp.components;
+const { Component, Fragment } = wp.element;
+const { TextControl, Button, Spinner } = wp.components;
 
 export default class BlockInput extends Component {
 	constructor() {
@@ -8,10 +8,8 @@ export default class BlockInput extends Component {
 	}
 
 	render() {
-		console.log('xd');
 		console.log( this.props );
 		const { attributes: { username, isSubmitted }, setAttributes, isError } = this.props;
-		console.log('xd');
 
 		return (
 			<Fragment>

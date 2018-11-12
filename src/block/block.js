@@ -14,6 +14,8 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { TextControl } = wp.components;
 
+let isError = false, responseCode = 0;
+
 /**
  * Register: aa Gutenberg Block.
  *
