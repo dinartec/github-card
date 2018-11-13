@@ -63,3 +63,15 @@ function github_prof_card_cgb_editor_assets() {
 
 // Hook: Editor assets.
 add_action( 'enqueue_block_editor_assets', 'github_prof_card_cgb_editor_assets' );
+
+function my_customize_rest_cors() {
+	remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
+	add_filter( 'rest_pre_serve_request', function( $value ) {
+	header( 'Access-Control-Allow-Origin: *' );
+	header( 'Access-Control-Allow-Methods: GET' );
+	header( 'Access-Control-Allow-Credentials: true' );
+	header( 'Access-Control-Expose-Headers: Link', false );
+	return $value;
+	} );
+	}
+	add_action( 'rest_api_init', 'my_customize_rest_cors', 15 );

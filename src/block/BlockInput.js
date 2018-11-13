@@ -8,13 +8,12 @@ export default class BlockInput extends Component {
 	}
 
 	render() {
-		console.log( this.props );
 		const { attributes: { username, isSubmitted }, setAttributes, isError } = this.props;
 
 		return (
 			<Fragment>
 				<TextControl
-					label={ __( 'Enter your GitHub username', 'github-prof-card' ) }
+					label={ __( 'Enter your GitHub username:', 'github-prof-card' ) }
 					help={ __( isError ? 'Something went wrong fetching that username. Try again.' : '' , 'github-prof-card' ) }
 					value={ username }
 					onChange={ username => setAttributes( { username } ) }

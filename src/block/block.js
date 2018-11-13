@@ -9,10 +9,12 @@
 import './style.scss';
 import './editor.scss';
 import BlockInput from './BlockInput';
+import api from './handleAPICall';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 const { TextControl } = wp.components;
+const { handleAPICall } = api;
 
 let isError = false, responseCode = 0;
 
@@ -68,12 +70,27 @@ registerBlockType( 'cgb/block-github-prof-card', {
 		const {attributes, setAttributes, className} = props;
 		const {username, isSubmitted} = attributes;
 
+		if ( isSubmitted === true ) {
+			if ( username === '' ) {
+				setAttributes({isSubmitted:false});
+			}
+			else {
+				const response = handleAPICall(username);
+				if (response === null) {
+					isError === true;
+				}
+				else {
+					return(<>)
+				}
+			}
+		}
+
 
 		// Creates a <p class='wp-block-cgb-block-github-prof-card'></p>.
-		if ( username === '' || isSubmitted === false ) {
+		if ( isError === true || isSubmitted === false || username === '' ) {
 			return (
 				<div className = {className}>
-					<BlockInput {...{ attributes, setAttributes } } />
+					<BlockInput {...{ attributes, setAttributes, isError } } />
 				</div>);
 		}
 	},
