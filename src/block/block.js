@@ -1,5 +1,5 @@
 /**
- * BLOCK: github-prof-card
+ * BLOCK: github-card
  *
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
@@ -13,7 +13,7 @@ import api from './handleAPICall';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { TextControl } = wp.components;
+const { Placeholder, Spinner } = wp.components;
 const { handleAPICall } = api;
 
 let isError = false, responseCode = 0;
@@ -31,15 +31,16 @@ let isError = false, responseCode = 0;
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( 'cgb/block-github-prof-card', {
+registerBlockType( 'cgb/block-github-card', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'Github Profile Card' ), // Block title.
+	title: __( 'Github Card', 'github-card' ), // Block title.
+	description: __('A block that embeds a card containing information about a Github user and optional repositories display', 'github-card'),
 	icon: 'admin-post', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'embed', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'Github Profile' ),
-		__( 'Profile embed' ),
-		__( 'Card' ),
+		__( 'Github Card','github-card' ),
+		__( 'Profile embed','github-card' ),
+		__( 'Repo Repositories','github-card' ),
 	],
 	attributes: {
 		username: {
@@ -53,9 +54,13 @@ registerBlockType( 'cgb/block-github-prof-card', {
 			default: false,
 		},
 		style: {
-			type: 'string',
+			type: 'number',
 			default: '1',
 		}
+	},
+
+	componentDidMount() {
+		console.log('it mounted!');
 	},
 
 	/**
@@ -67,6 +72,7 @@ registerBlockType( 'cgb/block-github-prof-card', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: ( props ) => {
+
 		const {attributes, setAttributes, className} = props;
 		const {username, isSubmitted} = attributes;
 
@@ -80,13 +86,13 @@ registerBlockType( 'cgb/block-github-prof-card', {
 					isError === true;
 				}
 				else {
-					return(<>)
+					return <Placeholder label={<Spinner />}/>;
 				}
 			}
 		}
 
 
-		// Creates a <p class='wp-block-cgb-block-github-prof-card'></p>.
+		// Creates a <p class='wp-block-cgb-block-github-card'></p>.
 		if ( isError === true || isSubmitted === false || username === '' ) {
 			return (
 				<div className = {className}>

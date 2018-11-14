@@ -1,1 +1,20 @@
-.wp-block-cgb-block-github-prof-card{background:#f4f4f4;border:1px solid #f7f7f7;border-radius:5px;color:#292929;margin:0 auto;max-width:740px;padding:2rem}
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+.wp-block-cgb-block-github-prof-card {
+  background: #f4f4f4;
+  border: 1px solid #f7f7f7;
+  border-radius: 5px;
+  color: #292929;
+  margin: 0 auto;
+  max-width: 740px;
+  padding: 2rem; }

@@ -1,4 +1,3 @@
-import graphqlRequest from 'graphql-request';
 
 const api = {};
 
@@ -10,9 +9,6 @@ api.handleAPICall = user => {
 		method: 'GET'
 	})
 		.then(response => response.json())
-  	.then( responseJson => {
-			 return responseJSON;
-		})
 		.catch( () => null);
 }
 

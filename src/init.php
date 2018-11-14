@@ -59,7 +59,7 @@ function github_prof_card_cgb_editor_assets() {
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: filemtime — Gets file modification time.
 	);
-} // End function github_prof_card_cgb_editor_assets().
+} // End function github_card_cgb_editor_assets().
 
 // Hook: Editor assets.
 add_action( 'enqueue_block_editor_assets', 'github_prof_card_cgb_editor_assets' );

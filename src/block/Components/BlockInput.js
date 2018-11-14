@@ -13,8 +13,8 @@ export default class BlockInput extends Component {
 		return (
 			<Fragment>
 				<TextControl
-					label={ __( 'Enter your GitHub username:', 'github-prof-card' ) }
-					help={ __( isError ? 'Something went wrong fetching that username. Try again.' : '' , 'github-prof-card' ) }
+					label={ __( 'Enter your GitHub username:', 'github-card' ) }
+					help={ __( isError ? 'Something went wrong fetching that username. Try again.' : '' , 'github-card' ) }
 					value={ username }
 					onChange={ username => setAttributes( { username } ) }
 					/>
