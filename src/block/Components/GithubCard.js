@@ -2,7 +2,7 @@ const { __ } = wp.i18n; // Import __() from wp.i18n
 const { Component, Fragment } = wp.element;
 const { TextControl, Button, Spinner } = wp.components;
 
-export default class GithubCard extends Component {
+export default class GithubCardBlock extends Component {
 	constructor() {
 		super( ...arguments );
 	};
@@ -48,7 +48,7 @@ export default class GithubCard extends Component {
 	/**
 	 * Creates a snippet a list item with a link, an icon, and some text
 	 *
-	 * @memberof GithubCard
+	 * @memberof GithubCardBlock
 	 */
 	GhRepoIcon = props => {
 		const {url, text, iconId} = props;

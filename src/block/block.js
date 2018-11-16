@@ -8,15 +8,10 @@
 //  Import CSS.
 import './style.scss';
 import './editor.scss';
-import BlockInput from './BlockInput';
-import api from './handleAPICall';
+import Edit from './Components/Edit';
 
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
-const { Placeholder, Spinner } = wp.components;
-const { handleAPICall } = api;
-
-let isError = false, responseCode = 0;
 
 /**
  * Register: aa Gutenberg Block.
@@ -49,18 +44,22 @@ registerBlockType( 'cgb/block-github-card', {
 			attribute: 'value',
 			default: '',
 		},
-		isSubmitted: {
-			type: 'boolean',
-			default: false,
+		// isSubmitted: {
+		// 	type: 'boolean',
+		// 	default: false,
+		// },
+		repoArray: {
+			type: 'array',
+			default: []
+		},
+		userInfo: {
+			type: 'object',
+			default: {}
 		},
 		style: {
 			type: 'number',
 			default: '1',
 		}
-	},
-
-	componentDidMount() {
-		console.log('it mounted!');
 	},
 
 	/**
@@ -72,33 +71,17 @@ registerBlockType( 'cgb/block-github-card', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: ( props ) => {
+		const { className, setAttributes } = props,
+					update = {
+						username: username => setAttributes({username}),
+						userInfo: userInfo => setAttributes({userInfo}),
+						repoArray: repoArray => setAttributes({repoArray})
+					};
 
-		const {attributes, setAttributes, className} = props;
-		const {username, isSubmitted} = attributes;
-
-		if ( isSubmitted === true ) {
-			if ( username === '' ) {
-				setAttributes({isSubmitted:false});
-			}
-			else {
-				const response = handleAPICall(username);
-				if (response === null) {
-					isError === true;
-				}
-				else {
-					return <Placeholder label={<Spinner />}/>;
-				}
-			}
-		}
-
-
-		// Creates a <p class='wp-block-cgb-block-github-card'></p>.
-		if ( isError === true || isSubmitted === false || username === '' ) {
-			return (
-				<div className = {className}>
-					<BlockInput {...{ attributes, setAttributes, isError } } />
-				</div>);
-		}
+		return(
+			<div className = { className }>
+				<Edit { ...{ ...props, update} }/>
+			</div>);
 	},
 
 	/**

@@ -5,22 +5,30 @@ const { TextControl, Button, Spinner } = wp.components;
 export default class BlockInput extends Component {
 	constructor() {
 		super( ...arguments );
+		this.render.bind(this);
+
+	};
+
+	state = {
+		inputUsername : ''
+	};
+
+	componentWillMount = () => {
+		this.setState({ inputUsername : this.props.username });
 	}
 
 	render() {
-		const { attributes: { username, isSubmitted }, setAttributes, isError } = this.props;
+		const { username, isError, update } = this.props;
 
 		return (
 			<Fragment>
 				<TextControl
 					label={ __( 'Enter your GitHub username:', 'github-card' ) }
 					help={ __( isError ? 'Something went wrong fetching that username. Try again.' : '' , 'github-card' ) }
-					value={ username }
-					onChange={ username => setAttributes( { username } ) }
+					value={ this.state.inputUsername }
+					onChange={ inputUsername => this.setState({inputUsername}) }
 					/>
-					{isSubmitted ?
-					(<Spinner />) :
-				(<Button isDefault onClick={ () => setAttributes( {isSubmitted: true} )}>Submit</Button>) }
+				<Button onClick={ () => update.username( this.state.inputUsername )} >Submit</Button>
 			</Fragment>
 		);
 	}
