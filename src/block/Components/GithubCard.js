@@ -38,7 +38,7 @@ export default class GithubCardBlock extends Component {
 			<li>
 				<a href={ url }>
 					{ iconId && <p>{iconId}</p>}
-					{ title && <strong>{ title }</strong>}
+					{ title && <strong>{ title } </strong>}
 					{text}
 				</a>
 			</li>
@@ -94,7 +94,7 @@ export default class GithubCardBlock extends Component {
 	 */
 	GhReposLinks = props => {
 		// Destructures variables to be used and creates the elements' class
-		const { reposArray, title } = props;
+		const { reposArray = [], title } = props;
 		let repoClass = 'repo-element';
 
 		//If there are more than 3 elements, they will be rendered with half the width of the parent element.
@@ -133,12 +133,12 @@ export default class GithubCardBlock extends Component {
 
 	render(){
 
-		const {apiCall:{ html_url:profile_url, login:user, name, avatar_url:avatar, bio, followers, followers_url, public_gists:gists, gists_url, public_repos:repos, repos_url  }, reposArray =[] } = this.props;
+		const {userInfo:{ html_url:profile_url, login:user, name, avatar_url:avatar, bio, followers, followers_url, public_gists:gists, gists_url, public_repos:repos, repos_url  }, reposArray = [] } = this.props;
 
 
 		return(<Fragment>
 			<this.GhUserInfo { ...{ user, name, profile_url, avatar }} />
-			<this.GhReposLinks { ...{ title: "Featured Repos", reposArray }} />
+			{/* <this.GhReposLinks { ...{ title: "Featured Repos", reposArray }} /> */}
 			<this.GhUserLinks { ...{ followers, followers_url, gists, gists_url, repos, repos_url } } />
 		</Fragment>)
 	}

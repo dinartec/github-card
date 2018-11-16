@@ -28,7 +28,9 @@ export default class BlockInput extends Component {
 					value={ this.state.inputUsername }
 					onChange={ inputUsername => this.setState({inputUsername}) }
 					/>
-				<Button onClick={ () => update.username( this.state.inputUsername )} >Submit</Button>
+				<Button onClick={ () => {
+												update.username( this.state.inputUsername );
+												update.error()}} >Submit</Button>
 			</Fragment>
 		);
 	}

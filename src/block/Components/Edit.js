@@ -5,7 +5,6 @@ import handleAPICall from "./handleAPICall";
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { Component, Fragment } = wp.element;
 const { TextControl, Button, Spinner, Placeholder } = wp.components;
-let isError = false;
 
 export default class Edit extends Component {
 
@@ -16,7 +15,7 @@ export default class Edit extends Component {
 	};
 
 	state = {
-
+		isError: false
 	};
 
 	componentDidMount() {
@@ -24,13 +23,20 @@ export default class Edit extends Component {
 
 	};
 
-	componentDidUpdate() {
+	async componentDidUpdate() {
 
 		const { attributes: { username, userInfo, repoArray }, update } = this.props;
-		if ( username !== '' ){
+		if ( username !== '' && !this.state.isError ){
 			if ( !(userInfo.hasOwnProperty( 'login' )) || username !== userInfo.login ) {
 			// if ( userInfo === null || username !== userInfo.login || update.last_update - 1200000 > 0 ) {
-				handleAPICall( username, update ) ;
+				const userInfoResponse = await handleAPICall( username );
+
+				if (userInfoResponse === null) {
+					this.setState({isError: true});
+				}
+				else {
+					console.log( 'it did it' );
+				}
 			}
 		}
 	}
@@ -39,17 +45,18 @@ export default class Edit extends Component {
 	render() {
 
 		const { attributes: { username, userInfo, repoArray }, update } = this.props;
-		console.log(userInfo);
+		const { isError } = this.state;
 
-		if ( username === '' ) {
-			return <BlockInput {...{ username, update }} />;
+		update.error = () => this.setState({isError: false});
+
+		if ( username === '' || isError === true ) {
+			return <BlockInput {...{ username, update, isError }} />;
 		}
 		else if( !(userInfo.hasOwnProperty( 'login' )) || username !== userInfo.login ) {
 			return <Placeholder icon={<Spinner />} label={__('Fetching @','github-card' ) + username}/>;
 		}
-		else if( userInfo.login !== username ){
 
-		}
+		return(<GithubCard {...{userInfo}} />)
 
 		// if ( isSubmitted === true ) {
 		// 	if ( username === '' ) {
