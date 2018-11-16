@@ -30,12 +30,12 @@ export default class Edit extends Component {
 			if ( !(userInfo.hasOwnProperty( 'login' )) || username !== userInfo.login ) {
 			// if ( userInfo === null || username !== userInfo.login || update.last_update - 1200000 > 0 ) {
 				const userInfoResponse = await handleAPICall( username );
-
+				console.log('how:', userInfoResponse);
 				if (userInfoResponse === null) {
 					this.setState({isError: true});
 				}
 				else {
-					console.log( 'it did it' );
+					update.userInfo( userInfoResponse );
 				}
 			}
 		}
@@ -57,28 +57,5 @@ export default class Edit extends Component {
 		}
 
 		return(<GithubCard {...{userInfo}} />)
-
-		// if ( isSubmitted === true ) {
-		// 	if ( username === '' ) {
-		// 		setAttributes({isSubmitted:false});
-		// 	}
-		// 	else {
-		// 		const response = handleAPICall(username);
-		// 		if (response === null) {
-		// 			isError === true;
-		// 		}
-		// 		else {
-		// 			return <Placeholder icon={<Spinner />} label={__('Fetching @','github-card' ) + username}/>;
-		// 		}
-		// 	}
-		// }
-
-		// if ( username === '' || !isSubmitted ) {
-
-		// 	return (
-		// 		<BlockInput { ...{ attributes, setAttributes, isError } } />
-		// 	)
-
-		// }
 	}
 }

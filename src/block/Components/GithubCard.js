@@ -19,7 +19,7 @@ export default class GithubCardBlock extends Component {
 				<a href={profile_url}>
 					<img src={avatar}/>
 					<h2>{name}</h2>
-					<h3>{user}</h3>
+					<h3>@{user}</h3>
 				</a>
 			</Fragment>
 		);
