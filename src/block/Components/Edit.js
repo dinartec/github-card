@@ -29,12 +29,14 @@ export default class Edit extends Component {
 		if ( username !== '' && !this.state.isError ){
 			if ( !(userInfo.hasOwnProperty( 'login' )) || username.toUpperCase() !== userInfo.login.toUpperCase() || Date.now() - userInfo.lastUpdate > 60000 ) {
 				const userInfoResponse = await handleAPICall( username );
-				userInfoResponse.lastUpdate = Date.now();
+
+				console.log('Updated!');
 
 				if (userInfoResponse === null) {
 					this.setState({isError: true});
 				}
 				else {
+					userInfoResponse.lastUpdate = Date.now();
 					update.username( userInfoResponse.login );
 					update.userInfo( userInfoResponse );
 				}
