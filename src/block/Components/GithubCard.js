@@ -10,13 +10,13 @@ export default class GithubCardBlock extends Component {
 	/**
 	 *	Creates HTML with the info and picture of a Github user
 	 *
-	 * @param {*} Props {user, name, profile_url, avatar}
+	 * @param {*} Props {user, name, url, avatar}
 	 * @returns
 	 */
-	GhUserInfo = ({user, name, profile_url, avatar}) => {
+	GhUserInfo = ({user, name, url, avatar}) => {
 		return (
 			<Fragment>
-				<a href={profile_url}>
+				<a href={url}>
 					<img src={avatar}/>
 					<h2>{name}</h2>
 					<h3>@{user}</h3>
@@ -106,7 +106,7 @@ export default class GithubCardBlock extends Component {
 			<div className = 'repo-list'>
 				<h2>{ title }</h2>
 				<ul>
-					{ repoClass.map( repo => <this.GhRepoLink { ...{ ...repo, repoClass } }/> ) }
+					{ reposArray.map( repo => <this.GhRepoLink { ...{ ...repo, repoClass } }/> ) }
 				</ul>
 			</div>
 		)
@@ -120,26 +120,27 @@ export default class GithubCardBlock extends Component {
 	 * @returns
 	 */
 	GhUserLinks = props => {
-		const { followers, followers_url, gists, gists_url, repos, repos_url } = props;
+		const { followers, gists, repos, url, gists_url } = props;
 
 		return(
 			<ul className="gh-user-links">
-				<this.GhListItem title="Followers" text={followers} url={followers_url} />
-				<this.GhListItem title="Gists" text={gists} url={gists_url} />
-				<this.GhListItem title="Repos" text={repos} url={repos_url} />
+				<this.GhListItem title="Followers" text={ followers } url={ `${url}?tab=followers` } />
+				<this.GhListItem title="Gists" text={ gists } url={ gists_url } />
+				<this.GhListItem title="Repos" text={ repos } url={ `${url}?tab=repositories` } />
 			</ul>
 		)
 	}
 
 	render(){
 
-		const {userInfo:{ html_url:profile_url, login:user, name, avatar_url:avatar, bio, followers, followers_url, public_gists:gists, gists_url, public_repos:repos, repos_url  }, reposArray = [] } = this.props;
-
+		const {userInfo:{ html_url:url, login:user, name, avatar_url:avatar, bio, followers, public_gists:gists, public_repos:repos  }, reposArray = [] } = this.props;
+		const gists_url = `https://gist.github.com/${user}`;
+		console.log(reposArray);
 
 		return(<Fragment>
-			<this.GhUserInfo { ...{ user, name, profile_url, avatar }} />
-			{/* <this.GhReposLinks { ...{ title: "Featured Repos", reposArray }} /> */}
-			<this.GhUserLinks { ...{ followers, followers_url, gists, gists_url, repos, repos_url } } />
+			<this.GhUserInfo { ...{ user, name, url, avatar }} />
+			<this.GhReposLinks { ...{ title: "Featured Repos", reposArray }} />
+			<this.GhUserLinks { ...{ followers, gists, repos, url, gists_url } } />
 		</Fragment>)
 	}
 }

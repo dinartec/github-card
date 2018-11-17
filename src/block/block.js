@@ -61,6 +61,11 @@ registerBlockType( 'cgb/block-github-card', {
 			default: '1',
 		}
 	},
+	styles: [
+		{ name: 'default', label: __( 'Short Line' ), isDefault: true },
+		{ name: 'wide', label: __( 'Wide Line' ) },
+		{ name: 'dots', label: __( 'Dots' ) },
+	],
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.

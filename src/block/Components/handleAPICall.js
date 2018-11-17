@@ -9,8 +9,7 @@ const handleAPICall = ( user, update) => {
 		.then( response => {
 			if ( response.status >= 200 && response.status < 300 ){
 				const parsedResponse = response.json();
-				parsedResponse.last_updated = Date.now();
-				console.log('hmm:', parsedResponse);
+
 
 				return parsedResponse;
 			} else {

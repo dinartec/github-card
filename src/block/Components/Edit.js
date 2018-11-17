@@ -27,14 +27,15 @@ export default class Edit extends Component {
 
 		const { attributes: { username, userInfo, repoArray }, update } = this.props;
 		if ( username !== '' && !this.state.isError ){
-			if ( !(userInfo.hasOwnProperty( 'login' )) || username !== userInfo.login ) {
-			// if ( userInfo === null || username !== userInfo.login || update.last_update - 1200000 > 0 ) {
+			if ( !(userInfo.hasOwnProperty( 'login' )) || username.toUpperCase() !== userInfo.login.toUpperCase() || Date.now() - userInfo.lastUpdate > 60000 ) {
 				const userInfoResponse = await handleAPICall( username );
-				console.log('how:', userInfoResponse);
+				userInfoResponse.lastUpdate = Date.now();
+
 				if (userInfoResponse === null) {
 					this.setState({isError: true});
 				}
 				else {
+					update.username( userInfoResponse.login );
 					update.userInfo( userInfoResponse );
 				}
 			}
