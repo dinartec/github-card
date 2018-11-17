@@ -44,10 +44,6 @@ registerBlockType( 'cgb/block-github-card', {
 			attribute: 'value',
 			default: '',
 		},
-		// isSubmitted: {
-		// 	type: 'boolean',
-		// 	default: false,
-		// },
 		repoArray: {
 			type: 'array',
 			default: []
@@ -56,9 +52,9 @@ registerBlockType( 'cgb/block-github-card', {
 			type: 'object',
 			default: {}
 		},
-		style: {
-			type: 'number',
-			default: '1',
+		isPinnedRepos: {
+			type: 'boolean',
+			default: 'true',
 		}
 	},
 	styles: [

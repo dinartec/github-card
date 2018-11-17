@@ -2,9 +2,10 @@ import GithubCard from "./GithubCard";
 import BlockInput from "./BlockInput";
 import handleAPICall from "./handleAPICall";
 
-const { __ } = wp.i18n; // Import __() from wp.i18n
-const { Component, Fragment } = wp.element;
-const { TextControl, Button, Spinner, Placeholder } = wp.components;
+const { __ } = wp.i18n;
+const { Component } = wp.element;
+const { Spinner, Placeholder, PanelBody, PanelRow } = wp.components;
+const { InspectorControls } = wp.editor
 
 export default class Edit extends Component {
 
@@ -44,6 +45,11 @@ export default class Edit extends Component {
 		}
 	}
 
+	BlockRender() {
+
+	}
+
+
 
 	render() {
 
@@ -59,6 +65,7 @@ export default class Edit extends Component {
 			return <Placeholder icon={<Spinner />} label={__('Fetching @','github-card' ) + username}/>;
 		}
 
-		return(<GithubCard {...{userInfo}} />)
+		return <GithubCard {...{userInfo}} />;
+
 	}
 }
