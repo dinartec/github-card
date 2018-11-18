@@ -68,7 +68,7 @@ export default class GithubCardBlock extends Component {
 	 */
 	GhRepoLink = props => {
 		//Destructures the needed properties from the Repo object and the class to be set
-		const {name, description, html_url:url, language, stargazers_count:stars, stargazers_url:stars_url, forks, forks_url, repoClass} = props;
+		const {name, description, html_url:url, language, stargazers_count:stars, stargazers_url:stars_url, forks, forks_url, repoClass } = props;
 
 		return(
 		<li className={repoClass}>
@@ -133,13 +133,13 @@ export default class GithubCardBlock extends Component {
 
 	render(){
 
-		const {userInfo:{ html_url:url, login:user, name, avatar_url:avatar, bio, followers, public_gists:gists, public_repos:repos  }, reposArray = [] } = this.props;
+		const {userInfo:{ html_url:url, login:user, name, avatar_url:avatar, followers, public_gists:gists, public_repos:repos  }, reposArray = [], showRepos = false } = this.props;
 		const gists_url = `https://gist.github.com/${user}`;
 		console.log(reposArray);
 
 		return(<Fragment>
 			<this.GhUserInfo { ...{ user, name, url, avatar }} />
-			<this.GhReposLinks { ...{ title: "Featured Repos", reposArray }} />
+			{ showRepos && <this.GhReposLinks { ...{ title: "Featured Repos", reposArray }} />}
 			<this.GhUserLinks { ...{ followers, gists, repos, url, gists_url } } />
 		</Fragment>)
 	}

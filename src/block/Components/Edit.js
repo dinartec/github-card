@@ -42,7 +42,7 @@ export default class Edit extends Component {
 	}
 
 	UIRender() {
-		const { attributes: { username, userInfo, repoArray }, update } = this.props;
+		const { attributes: { username, userInfo, repoArray, showRepos }, update } = this.props;
 		const { isError } = this.state;
 
 		update.error = () => this.setState({isError: false});
@@ -50,11 +50,11 @@ export default class Edit extends Component {
 		if ( username === '' || isError === true ) {
 			return <UsernameInput {...{ username, update, isError }} />;
 		}
-		else if( !(userInfo.hasOwnProperty( 'login' )) || username !== userInfo.login ) {
+		else if( !(userInfo.hasOwnProperty( 'login' )) || username.toUpperCase() !== userInfo.login.toUpperCase() ) {
 			return <Placeholder icon={<Spinner />} label={__('Fetching @','github-card' ) + username}/>;
 		}
 
-		return <GithubCard {...{ userInfo, repoArray }} />;
+		return <GithubCard {...{ userInfo, repoArray, showRepos }} />;
 
 	}
 
@@ -62,10 +62,10 @@ export default class Edit extends Component {
 
 	render() {
 
-		const { attributes: { username }, update } = this.props;
+		const { attributes, update } = this.props;
 		const { isError } = this.state;
 
-		return [ (<Inspector {...{ username, isError, update }}/>), this.UIRender()];
+		return [ (<Inspector {...{ attributes, isError, update }}/>), this.UIRender()];
 
 
 
