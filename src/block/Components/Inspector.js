@@ -14,10 +14,13 @@ export default class Edit extends Component {
 	render() {
 
 		return(<InspectorControls>
-			<PanelBody title={ __('Github username', 'github-card') }>
+			<PanelBody title={ __('Username', 'github-card') }>
 				<PanelRow>
 
 				</PanelRow>
+			</PanelBody>
+			<PanelBody title={ __('Repository display', 'github-card')}>
+
 			</PanelBody>
 		</InspectorControls>)
 	}

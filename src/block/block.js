@@ -29,11 +29,11 @@ const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.b
 registerBlockType( 'cgb/block-github-card', {
 	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
 	title: __( 'Github Card', 'github-card' ), // Block title.
-	description: __('A block that embeds a card containing information about a Github user and optional repositories display', 'github-card'),
+	description: __('Embed a card with information about Github users and repositories ', 'github-card'),
 	icon: 'admin-post', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'embed', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'Github Card','github-card' ),
+		__( 'Github Gh Card','github-card' ),
 		__( 'Profile embed','github-card' ),
 		__( 'Repo Repositories','github-card' ),
 	],
