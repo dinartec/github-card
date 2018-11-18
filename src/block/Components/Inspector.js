@@ -1,9 +1,11 @@
+import UsernameInput from "./Inputs/UsernameInput";
+
 const { __ } = wp.i18n;
 const { Component } = wp.element;
-const { Spinner, Placeholder, PanelBody, PanelRow } = wp.components;
+const { PanelBody, PanelRow } = wp.components;
 const { InspectorControls } = wp.editor
 
-export default class Edit extends Component {
+export default class Inspetor extends Component {
 
 
 	constructor(props) {
@@ -12,11 +14,12 @@ export default class Edit extends Component {
 	};
 
 	render() {
+		const { username, isError, update } = this.props;
 
 		return(<InspectorControls>
 			<PanelBody title={ __('Username', 'github-card') }>
 				<PanelRow>
-
+					<UsernameInput {...{ username, update, isError }} />
 				</PanelRow>
 			</PanelBody>
 			<PanelBody title={ __('Repository display', 'github-card')}>

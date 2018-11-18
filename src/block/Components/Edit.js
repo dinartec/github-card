@@ -1,6 +1,7 @@
 import GithubCard from "./GithubCard";
-import BlockInput from "./BlockInput";
+import UsernameInput from "./Inputs/UsernameInput";
 import handleAPICall from "./handleAPICall";
+import Inspector from "./Inspector";
 
 const { __ } = wp.i18n;
 const { Component } = wp.element;
@@ -17,11 +18,6 @@ export default class Edit extends Component {
 
 	state = {
 		isError: false
-	};
-
-	componentDidMount() {
-
-
 	};
 
 	async componentDidUpdate() {
@@ -45,7 +41,20 @@ export default class Edit extends Component {
 		}
 	}
 
-	BlockRender() {
+	UIRender() {
+		const { attributes: { username, userInfo, repoArray }, update } = this.props;
+		const { isError } = this.state;
+
+		update.error = () => this.setState({isError: false});
+
+		if ( username === '' || isError === true ) {
+			return <UsernameInput {...{ username, update, isError }} />;
+		}
+		else if( !(userInfo.hasOwnProperty( 'login' )) || username !== userInfo.login ) {
+			return <Placeholder icon={<Spinner />} label={__('Fetching @','github-card' ) + username}/>;
+		}
+
+		return <GithubCard {...{ userInfo, repoArray }} />;
 
 	}
 
@@ -53,19 +62,12 @@ export default class Edit extends Component {
 
 	render() {
 
-		const { attributes: { username, userInfo, repoArray }, update } = this.props;
+		const { attributes: { username }, update } = this.props;
 		const { isError } = this.state;
 
-		update.error = () => this.setState({isError: false});
+		return [ (<Inspector {...{ username, isError, update }}/>), this.UIRender()];
 
-		if ( username === '' || isError === true ) {
-			return <BlockInput {...{ username, update, isError }} />;
-		}
-		else if( !(userInfo.hasOwnProperty( 'login' )) || username !== userInfo.login ) {
-			return <Placeholder icon={<Spinner />} label={__('Fetching @','github-card' ) + username}/>;
-		}
 
-		return <GithubCard {...{userInfo}} />;
 
 	}
 }
