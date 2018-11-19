@@ -1,0 +1,23 @@
+{
+  repositoryOwner(login: "wesbos") {
+    ... on User {
+      pinnedRepositories(first: 6) {
+        edges {
+          node {
+            stargazers {
+              totalCount
+            }
+            forkCount
+            name
+            description
+            url
+            primaryLanguage {
+              name
+              color
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,8 +5,7 @@ import Inspector from "./Inspector";
 
 const { __ } = wp.i18n;
 const { Component } = wp.element;
-const { Spinner, Placeholder, PanelBody, PanelRow } = wp.components;
-const { InspectorControls } = wp.editor
+const { Spinner, Placeholder } = wp.components;
 
 export default class Edit extends Component {
 

@@ -56,9 +56,9 @@ registerBlockType( 'cgb/block-github-card', {
 			type: 'boolean',
 			default: false
 		},
-		isPinnedRepos: {
+		pinnedRepos: {
 			type: 'boolean',
-			default: 'true',
+			default: true,
 		}
 	},
 	styles: [
@@ -81,7 +81,8 @@ registerBlockType( 'cgb/block-github-card', {
 						username: username => setAttributes({username}),
 						userInfo: userInfo => setAttributes({userInfo}),
 						repoArray: repoArray => setAttributes({repoArray}),
-						showRepos: showRepos => setAttributes({showRepos})
+						showRepos: showRepos => setAttributes({showRepos}),
+						pinnedRepos: pinnedRepos => setAttributes({pinnedRepos})
 					};
 
 		return(

@@ -1,6 +1,6 @@
 const { __ } = wp.i18n; // Import __() from wp.i18n
 const { Component, Fragment } = wp.element;
-const { TextControl, Button, Spinner } = wp.components;
+const { TextControl, Button } = wp.components;
 
 export default class UsernameInput extends Component {
 	constructor() {
