@@ -12,5 +12,49 @@
   color: $black;
   margin: 0 auto;
   max-width: 740px;
-  padding: 2rem;
+	padding: 2rem;
+
+}
+
+#github-card-repo-input {
+	margin: 1px 0;
+
+	button {
+		padding: 0px;
+	}
+
+	input {
+		flex: 1;
+	}
+
+	div {
+		margin: 0;
+	}
+
+	.container {
+		display: flex;
+		align-items: center;
+		> div.components-base-control {
+			flex: 1;
+		}
+		svg {
+			width: 15px;
+			height: 15px;
+		}
+
+		div.buttons {
+			margin-right: 2px;
+			opacity: 0;
+			&.visible {
+				opacity: 0.5;
+				&:hover{
+					opacity: 1;
+				}
+				.disabled {
+					opacity: 0;
+					cursor: default;
+				}
+			}
+		}
+	}
 }

@@ -85,9 +85,8 @@ registerBlockType( 'cgb/block-github-card', {
 						pinnedRepos: pinnedRepos => setAttributes({pinnedRepos})
 					};
 
-		return(
-			<div className = { className }>
-				<Edit { ...{ ...props, update} }/>
+		return(<div className = { className }>
+				<Edit { ...{ ...props, update, className } }/>
 			</div>);
 	},
 

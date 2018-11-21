@@ -18,3 +18,34 @@
   margin: 0 auto;
   max-width: 740px;
   padding: 2rem; }
+
+#github-card-repo-input {
+  margin: 1px 0; }
+  #github-card-repo-input button {
+    padding: 0px; }
+  #github-card-repo-input input {
+    -ms-flex: 1;
+        flex: 1; }
+  #github-card-repo-input div {
+    margin: 0; }
+  #github-card-repo-input .container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center; }
+    #github-card-repo-input .container > div.components-base-control {
+      -ms-flex: 1;
+          flex: 1; }
+    #github-card-repo-input .container svg {
+      width: 15px;
+      height: 15px; }
+    #github-card-repo-input .container div.buttons {
+      margin-right: 2px;
+      opacity: 0; }
+      #github-card-repo-input .container div.buttons.visible {
+        opacity: 0.5; }
+        #github-card-repo-input .container div.buttons.visible:hover {
+          opacity: 1; }
+        #github-card-repo-input .container div.buttons.visible .disabled {
+          opacity: 0;
+          cursor: default; }
