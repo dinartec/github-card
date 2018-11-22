@@ -17,10 +17,21 @@
 }
 
 #github-card-repo-input {
+
 	margin: 1px 0;
 
-	button {
-		padding: 0px;
+	> h2 {
+		margin-bottom: 0.2em;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		span {
+			margin-bottom: 3px;
+		}
+	}
+
+	> p {
+		margin-bottom: 0.5em;
 	}
 
 	input {
@@ -34,6 +45,11 @@
 	.container {
 		display: flex;
 		align-items: center;
+
+		button {
+			padding: 0px;
+		}
+
 		> div.components-base-control {
 			flex: 1;
 		}

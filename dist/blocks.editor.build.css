@@ -21,8 +21,18 @@
 
 #github-card-repo-input {
   margin: 1px 0; }
-  #github-card-repo-input button {
-    padding: 0px; }
+  #github-card-repo-input > h2 {
+    margin-bottom: 0.2em;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: justify;
+        justify-content: space-between; }
+    #github-card-repo-input > h2 span {
+      margin-bottom: 3px; }
+  #github-card-repo-input > p {
+    margin-bottom: 0.5em; }
   #github-card-repo-input input {
     -ms-flex: 1;
         flex: 1; }
@@ -33,6 +43,8 @@
     display: flex;
     -ms-flex-align: center;
         align-items: center; }
+    #github-card-repo-input .container button {
+      padding: 0px; }
     #github-card-repo-input .container > div.components-base-control {
       -ms-flex: 1;
           flex: 1; }

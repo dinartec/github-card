@@ -9,7 +9,7 @@ export default class ReposInput extends Component {
   }
 
   state = {
-		reposArray: ['example', 'umm' ,'woot'],
+		reposArray: ['example', 'umm' ,'woot','4','5','6'],
 		index: -1
   }
 
@@ -20,22 +20,27 @@ export default class ReposInput extends Component {
 
 	InputMover = props => {
 
-		const { className, disableBottom, disableTop, disableX } = props;
-		console.log( className );
+		const { className, disableBottom, disableTop, disableX, index } = props;
 
 		return(<div className={ className } >
-	<IconButton
-					className={ disableTop }
-					icon={ 'arrow-up' }
-				/>
-	<IconButton
-					className={ disableX }
-					icon={ 'no' }
-				/>
-	<IconButton
-					className={ disableBottom }
-					icon={'arrow-down'}
-				/>
+		<IconButton
+						onClick={ () => this.moveItem( index, 'up' )}
+						tabIndex={-1}
+						className={ disableTop }
+						icon={ 'arrow-up' }
+					/>
+		<IconButton
+						onClick={ () => this.deleteItem( index )}
+						tabIndex={-1}
+						className={ disableX }
+						icon={ 'no' }
+					/>
+		<IconButton
+						onClick={ () => this.moveItem( index, 'down' )}
+						tabIndex={-1}
+						className={ disableBottom }
+						icon={'arrow-down'}
+					/>
 	</div>)
 	}
 
@@ -67,7 +72,7 @@ export default class ReposInput extends Component {
 		}
 
 		return (<div className="container" onMouseEnter={() => this.setState({index})} onMouseLeave={() => this.setState({index: -1})}>
-			<this.InputMover {...{disableTop, disableBottom, disableX, className}} />
+			<this.InputMover {...{ disableTop, disableBottom, disableX, className, index }} />
 			<TextControl value={ reposArray[index] }
 									 onFocus={ () => this.setState({toolbarIndex: index})}
 									 onChange= { value => {
@@ -75,12 +80,51 @@ export default class ReposInput extends Component {
 												this.setState({reposArray});
 											 }} />
 		</div>);
+	}
+
+	deleteItem = index => {
+		const arrayLength = this.state.reposArray.length,
+					newArray = this.state.reposArray.slice();
+
+		if ( arrayLength === 1) {
+			return null;
 		}
+
+		newArray.splice( index, 1 );
+		this.setState({reposArray: newArray});
+
+	}
+
+	moveItem = (index, direction) => {
+
+		const arrayLength = this.state.reposArray.length,
+					newIndex = ( direction === 'up' ? index - 1 : index + 1 ),
+					newArray = this.state.reposArray.slice(),
+					value = newArray[index];
+
+		if( ( direction === 'up' && index === 0) || ( direction === 'down' && index === arrayLength - 1) ){
+			return null;
+		}
+
+		newArray.splice(index, 1);
+		newArray.splice(newIndex, 0, value);
+
+		this.setState({reposArray: newArray});
+	}
 
   render() {
 
+		const { reposArray, index:stateIndex } = this.state,
+					arrayLength = reposArray.length;
+
     return (<div id="github-card-repo-input">
-			{ this.state.reposArray.map((value, index) => <this.RepoInput index={index} />, this) }
+			<h2>
+				<span>Custom Repositories</span>
+				<IconButton icon="plus"
+										label={ arrayLength > 5 ? 'Maximum 6 repos can be displayed' : 'Add another repo display'}/>
+			</h2>
+			<p><i>Add the link or the route to the repository.</i></p>
+			{ reposArray.map((value, index) => <this.RepoInput index={index} />, this) }
 		</div>)
 
   }
