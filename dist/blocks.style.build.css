@@ -9,10 +9,12 @@
  *
  * CSS for both Frontend+Backend.
  */
-.wp-block-cgb-block-github-prof-card {
-  background: orangered;
-  border: 0.2rem solid #292929;
+.wp-block-cgb-block-github-card {
+  background: white;
+  border: 1px solid #f7f7f7;
+  border-radius: 5px;
   color: #292929;
   margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem; }
+  max-width: 740px; }
+  .wp-block-cgb-block-github-card .components-base-control__help {
+    font-size: 13px; }

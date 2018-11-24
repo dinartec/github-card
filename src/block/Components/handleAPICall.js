@@ -7,6 +7,7 @@ const handleAPICall = ( user, update) => {
 		method: 'GET'
 	})
 		.then( response => {
+			console.log(response);
 			if ( response.status >= 200 && response.status < 300 ){
 				const parsedResponse = response.json();
 
@@ -16,7 +17,10 @@ const handleAPICall = ( user, update) => {
 				return null;
 			}
 		})
-		.catch( (err) => console.error( err ));
+		.catch( (err) => {
+			console.error( err )
+			return null;
+		});
 }
 
 export default handleAPICall;

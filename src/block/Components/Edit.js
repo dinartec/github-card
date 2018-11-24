@@ -26,9 +26,11 @@ export default class Edit extends Component {
 			if ( !(userInfo.hasOwnProperty( 'login' )) || username.toUpperCase() !== userInfo.login.toUpperCase() || Date.now() - userInfo.lastUpdate > 60000 ) {
 				const userInfoResponse = await handleAPICall( username );
 
-				console.log('Updated!');
+				if ( userInfoResponse === null ) {
 
-				if (userInfoResponse === null) {
+					if ( username.toUpperCase() === userInfo.login.toUpperCase() ) {
+						return null;
+					}
 					this.setState({isError: true});
 				}
 				else {

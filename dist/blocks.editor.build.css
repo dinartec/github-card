@@ -10,15 +10,6 @@
  * CSS for just Backend enqueued after style.scss
  * which makes it higher in priority.
  */
-.wp-block-cgb-block-github-prof-card {
-  background: #f4f4f4;
-  border: 1px solid #f7f7f7;
-  border-radius: 5px;
-  color: #292929;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem; }
-
 #github-card-repo-input {
   margin: 1px 0; }
   #github-card-repo-input > h2 {

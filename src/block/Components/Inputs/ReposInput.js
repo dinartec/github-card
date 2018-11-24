@@ -9,7 +9,7 @@ export default class ReposInput extends Component {
   }
 
   state = {
-		reposArray: ['example', 'umm' ,'woot','4','5','6'],
+		reposArray: [''],
 		index: -1
   }
 
@@ -74,6 +74,7 @@ export default class ReposInput extends Component {
 		return (<div className="container" onMouseEnter={() => this.setState({index})} onMouseLeave={() => this.setState({index: -1})}>
 			<this.InputMover {...{ disableTop, disableBottom, disableX, className, index }} />
 			<TextControl value={ reposArray[index] }
+									 placeholder='Insert the repo link or route'
 									 onFocus={ () => this.setState({toolbarIndex: index})}
 									 onChange= { value => {
 												reposArray[index] = value;
@@ -91,6 +92,20 @@ export default class ReposInput extends Component {
 		}
 
 		newArray.splice( index, 1 );
+		this.setState({reposArray: newArray});
+
+	}
+
+	addItem = () => {
+		const arrayLength = this.state.reposArray.length,
+					newArray = this.state.reposArray.slice();
+
+		if (arrayLength > 5) {
+			return null;
+		}
+
+		newArray.splice( arrayLength - 1, 0, '');
+
 		this.setState({reposArray: newArray});
 
 	}
@@ -114,13 +129,14 @@ export default class ReposInput extends Component {
 
   render() {
 
-		const { reposArray, index:stateIndex } = this.state,
+		const { reposArray } = this.state,
 					arrayLength = reposArray.length;
 
     return (<div id="github-card-repo-input">
 			<h2>
 				<span>Custom Repositories</span>
-				<IconButton icon="plus"
+				<IconButton onClick={ this.addItem }
+										icon="plus"
 										label={ arrayLength > 5 ? 'Maximum 6 repos can be displayed' : 'Add another repo display'}/>
 			</h2>
 			<p><i>Add the link or the route to the repository.</i></p>

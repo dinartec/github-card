@@ -3,12 +3,17 @@
  *
  * CSS for both Frontend+Backend.
  */
-
-.wp-block-cgb-block-github-prof-card  {
-  background: $red;
-  border: 0.2rem solid $black;
+.wp-block-cgb-block-github-card  {
+	background: white;
+	border: 1px solid #f7f7f7;
+	border-radius: 5px;
   color: $black;
   margin: 0 auto;
   max-width: 740px;
-  padding: 2rem;
+
+	.components-base-control__help {
+
+		font-size: 13px;
+
+	}
 }
