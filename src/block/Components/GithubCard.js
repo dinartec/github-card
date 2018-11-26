@@ -135,7 +135,7 @@ export default class GithubCardBlock extends Component {
 
 		const {userInfo:{ html_url:url, login:user, name, avatar_url:avatar, followers, public_gists:gists, public_repos:repos  }, reposArray = [], showRepos = false } = this.props;
 		const gists_url = `https://gist.github.com/${user}`;
-		console.log(reposArray);
+
 
 		return(<Fragment>
 			<this.GhUserInfo { ...{ user, name, url, avatar }} />

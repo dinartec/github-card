@@ -39,6 +39,12 @@
 		display: flex;
 		align-items: center;
 
+		.input-error {
+			input {
+				border-color: #b60000;
+			}
+		}
+
 		button {
 			padding: 0px;
 		}

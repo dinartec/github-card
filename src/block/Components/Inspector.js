@@ -1,5 +1,5 @@
 import UsernameInput from "./Inputs/UsernameInput";
-import ReposUnit from "./Inputs/ReposInput";
+import ReposInput from "./Inputs/ReposInput";
 
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
@@ -15,14 +15,14 @@ export default class Inspetor extends Component {
 	};
 
 	RepoSettings () {
-		const { attributes: { pinnedRepos }, update } = this.props;
+		const { attributes: { pinnedRepos, repoArray }, repoError, update } = this.props;
 
 		return (<Fragment>
 			<ToggleControl checked={ pinnedRepos }
 											onChange={ () => update.pinnedRepos( !pinnedRepos ) }
 						   				label={ __('Use pinned repos', 'github-card') }
 											help={ __( 'Toggle whether to use pinned repositories or user submitted ones' ,'github-card') } />
-			<ReposUnit />
+			<ReposInput {...{ repoError, update, repoArray}}/>
 
 		</Fragment>);
 

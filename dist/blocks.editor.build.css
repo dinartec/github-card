@@ -34,6 +34,8 @@
     display: flex;
     -ms-flex-align: center;
         align-items: center; }
+    #github-card-repo-input .container .input-error input {
+      border-color: #b60000; }
     #github-card-repo-input .container button {
       padding: 0px; }
     #github-card-repo-input .container > div.components-base-control {

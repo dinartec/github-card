@@ -52,6 +52,10 @@ registerBlockType( 'cgb/block-github-card', {
 			type: 'object',
 			default: {}
 		},
+		repoInfo: {
+			type: 'array',
+			default: []
+		},
 		showRepos: {
 			type: 'boolean',
 			default: false
@@ -81,6 +85,7 @@ registerBlockType( 'cgb/block-github-card', {
 						username: username => setAttributes({username}),
 						userInfo: userInfo => setAttributes({userInfo}),
 						repoArray: repoArray => setAttributes({repoArray}),
+						repoInfo: repoInfo => setAttributes({repoInfo}),
 						showRepos: showRepos => setAttributes({showRepos}),
 						pinnedRepos: pinnedRepos => setAttributes({pinnedRepos})
 					};
