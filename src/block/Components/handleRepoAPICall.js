@@ -2,6 +2,10 @@
 const handleAPICall = route => {
 	const root = 'https://api.github.com/repos/';
 
+	if ( route == '' ) {
+		return null;
+	}
+
 	return fetch(`${root}${route}`, {
 		crossDomain:true,
 		method: 'GET',

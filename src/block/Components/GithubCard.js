@@ -27,20 +27,17 @@ export default class GithubCardBlock extends Component {
 	};
 
 	/**
-	 * Creates a list item with text and optional title, html, and icon
+	 * Creates a list item with text and optional title
 	 *
 	 * @param {*} props text - optional:  url, title, iconId
 	 * @returns React element
 	 */
 	GhListItem = props => {
-		const { url = null, title = null, text, iconId = null } = props;
+		const { title = null, text} = props;
 		return(
 			<li>
-				<a href={ url }>
-					{ iconId && <p>{iconId}</p>}
 					{ title && <strong>{ title } </strong>}
 					{text}
-				</a>
 			</li>
 		)
 	}
@@ -68,7 +65,7 @@ export default class GithubCardBlock extends Component {
 	 */
 	GhRepoLink = props => {
 		//Destructures the needed properties from the Repo object and the class to be set
-		const {name, description, html_url:url, language, stargazers_count:stars, stargazers_url:stars_url, forks, forks_url, repoClass } = props;
+		const {name, description, html_url:url, language, stargazers_count:stars, forks, repoClass } = props;
 
 		return(
 		<li className={repoClass}>
@@ -77,9 +74,9 @@ export default class GithubCardBlock extends Component {
 				{ description }
 			</p>
 			<ul>
-				<this.GhListItem iconId={language} text={language}/>
-				<this.GhListItem iconId={'star'} url={stars_url} text={stars}/>
-				<this.GhListItem iconId={'fork'} url={forks_url} text={forks}/>
+				<this.GhListItem text={language}/>
+				<this.GhListItem title={'Stars'} text={stars}/>
+				<this.GhListItem title={'Forks'} text={forks}/>
 			</ul>
 		</li>
 		)
@@ -94,19 +91,20 @@ export default class GithubCardBlock extends Component {
 	 */
 	GhReposLinks = props => {
 		// Destructures variables to be used and creates the elements' class
-		const { reposArray = [], title } = props;
+		const { repoInfo = [], title } = props;
 		let repoClass = 'repo-element';
 
 		//If there are more than 3 elements, they will be rendered with half the width of the parent element.
-		if( reposArray.length > 3 ) {
+		if( repoInfo.length > 3 ) {
 			repoClass += ' half';
 		}
+
 
 		return (
 			<div className = 'repo-list'>
 				<h2>{ title }</h2>
 				<ul>
-					{ reposArray.map( repo => <this.GhRepoLink { ...{ ...repo, repoClass } }/> ) }
+					{ repoInfo.map( repo => <this.GhRepoLink { ...{ ...repo, repoClass } }/> ) }
 				</ul>
 			</div>
 		)
@@ -133,13 +131,13 @@ export default class GithubCardBlock extends Component {
 
 	render(){
 
-		const {userInfo:{ html_url:url, login:user, name, avatar_url:avatar, followers, public_gists:gists, public_repos:repos  }, reposArray = [], showRepos = false } = this.props;
+		const {userInfo:{ html_url:url, login:user, name, avatar_url:avatar, followers, public_gists:gists, public_repos:repos  }, repoInfo = [], showRepos = false } = this.props;
 		const gists_url = `https://gist.github.com/${user}`;
 
 
 		return(<Fragment>
 			<this.GhUserInfo { ...{ user, name, url, avatar }} />
-			{ showRepos && <this.GhReposLinks { ...{ title: "Featured Repos", reposArray }} />}
+			{ showRepos && <this.GhReposLinks { ...{ title: "Featured Repos", repoInfo }} />}
 			<this.GhUserLinks { ...{ followers, gists, repos, url, gists_url } } />
 		</Fragment>)
 	}
